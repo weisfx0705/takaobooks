@@ -114,16 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
         await getBotResponse(message);
     });
     
-    // 移除發送按鈕的額外事件處理，因為表單提交已經足夠
-    document.querySelector('.send-btn').addEventListener('click', (e) => {
-        e.preventDefault(); // 防止表單重複提交
-        chatForm.dispatchEvent(new Event('submit'));
+    // 確保發送按鈕也能清空文字輸入框
+    document.querySelector('.send-btn').addEventListener('click', () => {
+        // 如果正在錄音，停止錄音
+        if (isRecording && recognition) {
+            recognition.stop();
+            isRecording = false;
+            voiceButton.classList.remove('active');
+        }
+        // 觸發表單提交後，再次確保輸入框被清空
+        setTimeout(clearInput, 10);
     });
 
     // 語音輸入
     let recognition = null;
     let isRecording = false;
-    let hasSubmitted = false;
+    let hasSubmitted = false;  // 新增：追蹤是否已經送出過請求
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
         recognition.continuous = false;
@@ -140,9 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 自動送出訊息，但只在還沒送出過的情況下
                 const message = transcript.trim();
                 if (message && !hasSubmitted) {
-                    hasSubmitted = true;
-                    // 直接觸發表單提交，而不是創建新的事件
+                    hasSubmitted = true;  // 標記已經送出
                     chatForm.dispatchEvent(new Event('submit'));
+                    // 確保輸入框被清空
+                    setTimeout(clearInput, 10);
                 }
             } else {
                 // 如果是中間結果，只更新輸入框
@@ -153,17 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onend = () => {
             isRecording = false;
             voiceButton.classList.remove('active');
-            hasSubmitted = false;
+            hasSubmitted = false;  // 重置送出狀態
         };
 
         voiceButton.addEventListener('click', () => {
             if (!isRecording) {
+                // 開始錄音前清空輸入框
                 clearInput();
-                hasSubmitted = false;
+                hasSubmitted = false;  // 重置送出狀態
+                // 開始錄音
                 recognition.start();
                 isRecording = true;
                 voiceButton.classList.add('active');
             } else {
+                // 停止錄音
                 recognition.stop();
                 isRecording = false;
                 voiceButton.classList.remove('active');
