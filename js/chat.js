@@ -97,6 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = userInput.value.trim();
         if (!message) return;
 
+        // 如果正在錄音，停止錄音
+        if (isRecording && recognition) {
+            recognition.stop();
+            isRecording = false;
+            voiceButton.classList.remove('active');
+        }
+
         // 添加用戶訊息
         addUserMessage(message);
         
