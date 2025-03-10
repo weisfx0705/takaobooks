@@ -8,9 +8,10 @@
 - 管理者密碼：`[私下提供]`
 
 ## OpenAI API 設定
-- API Key：`[私下提供]`
+- API Key：`[私下提供]` （請見最後面解說）
 - 請妥善保管 API Key，不要分享給顧客
 - 系統會自動在本地儲存 API Key，方便下次使用
+
 
 ## 使用流程
 
@@ -76,3 +77,25 @@
 ## 系統更新
 系統會定期更新，請關注 GitHub 倉庫的更新通知：
 https://github.com/weisfx0705/takaobooks 
+
+### OpenAI API Key 說明
+OpenAI API Key 是使用 ChatGPT 服務的密鑰，就像是通往 AI 功能的鑰匙。您需要此密鑰才能啟動本系統的智慧推薦功能。
+
+#### 什麼是 OpenAI API Key？
+- 這是一串由字母和數字組成的代碼，以 `sk-` 開頭
+- 它允許您的應用程式連接到 OpenAI 的 AI 服務
+- 使用 API Key 是需要付費的，但費用通常很低（每次對話約幾分錢）
+
+#### 如何獲取 OpenAI API Key？
+1. 註冊 OpenAI 帳號：前往 [OpenAI 官網](https://openai.com/)
+2. 添加付款方式：需要提供信用卡資訊
+3. 創建新的 API Key：在帳戶設定中找到 API 部分
+
+#### 詳細申請教學
+請參考以下教學網址，瞭解如何一步步申請 OpenAI API Key：
+[OpenAI API Key 申請教學](https://www.wordss.ai/blog/how-to-get-openai-api-key)
+
+#### 注意事項
+- API Key 就像密碼，請妥善保管，不要分享給他人
+- 如果您認為 API Key 已被洩露，請立即在 OpenAI 網站上重新生成
+- 本系統僅在本地儲存 API Key，不會傳送到我們的伺服器
