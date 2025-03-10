@@ -116,9 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 語音輸入
     let recognition = null;
     let isRecording = false;
+    let hasSubmitted = false;  // 新增：追蹤是否已經送出過請求
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
-        recognition.continuous = false;  // 改為 false，避免持續錄音
+        recognition.continuous = false;
         recognition.interimResults = true;
         recognition.lang = 'zh-TW';
 
@@ -129,9 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // 如果是最終結果，更新輸入框
             if (result.isFinal) {
                 userInput.value = transcript;
-                // 自動送出訊息
+                // 自動送出訊息，但只在還沒送出過的情況下
                 const message = transcript.trim();
-                if (message) {
+                if (message && !hasSubmitted) {
+                    hasSubmitted = true;  // 標記已經送出
                     chatForm.dispatchEvent(new Event('submit'));
                     // 確保輸入框被清空
                     setTimeout(clearInput, 10);
@@ -145,12 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onend = () => {
             isRecording = false;
             voiceButton.classList.remove('active');
+            hasSubmitted = false;  // 重置送出狀態
         };
 
         voiceButton.addEventListener('click', () => {
             if (!isRecording) {
                 // 開始錄音前清空輸入框
                 clearInput();
+                hasSubmitted = false;  // 重置送出狀態
                 // 開始錄音
                 recognition.start();
                 isRecording = true;
