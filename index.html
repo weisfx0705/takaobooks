@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厭世女巫的書店</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        .login-content h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #333;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <h2>管理者登入</h2>
+            <form id="loginForm" class="login-form">
+                <input type="text" id="username" placeholder="帳號" required>
+                <input type="password" id="password" placeholder="密碼" required>
+                <button type="submit">登入</button>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <header>
+            <img src="image/logo_pc.png" alt="三餘書店" class="logo">
+            <h1>住在書店的厭世女巫</h1>
+            <p class="subtitle">三餘書店的占星骰子儀式</p>
+        </header>
+        
+        <main>
+            <div class="card">
+                <h2>歡迎來到女巫選書系統</h2>
+                <p>請先貼上書店的圖書清單，並輸入您的 OpenAI API Key 以啟動系統</p>
+                
+                <form id="setup-form">
+                    <div class="form-group">
+                        <label for="text-input">請貼上圖書清單文字</label>
+                        <textarea id="text-input" rows="6" placeholder="請貼上您的圖書清單..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group api-key-group">
+                        <label for="api-key">OpenAI API Key</label>
+                        <div class="input-with-button">
+                            <input type="password" id="api-key" placeholder="sk-..." required>
+                            <button type="button" id="clear-api-key" class="btn-icon" title="清除已儲存的 API Key">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <small class="hint">您的 API Key 僅會保存在本地瀏覽器中，不會傳送到我們的伺服器</small>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember-api-key" checked>
+                            <label for="remember-api-key">記住我的 API Key</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">下一步</button>
+                </form>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 三餘書店 | 厭世女巫的選書系統| 義守大學陳嘉暐開發</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html> 

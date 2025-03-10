@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>住在書店的厭世女巫 - 聊天</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <div class="container chat-container">
+        <header>
+            <img src="image/logo_pc.png" alt="三餘書店" class="logo">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>住在書店的厭世女巫</h1>
+                    <p class="subtitle">問問題，獲得命運的指引與書籍的推薦</p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="chat-area">
+                <div id="chat-messages" class="messages">
+                    <!-- 聊天訊息會被動態添加到這裡 -->
+                </div>
+                
+                <div class="message-input">
+                    <form id="chat-form">
+                        <div class="input-with-buttons">
+                            <button type="button" id="voice-input-btn" class="voice-btn">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                            <div class="input-wrapper">
+                                <textarea id="user-input" placeholder="提出您的問題..." rows="1"></textarea>
+                                <div class="input-hint">按Enter發送，Shift+Enter換行</div>
+                            </div>
+                            <button type="submit" class="send-btn">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                            <button type="button" id="clear-chat" class="clear-btn">
+                                <i class="fa-solid fa-broom"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 三餘書店 | 厭世女巫的選書系統| 義守大學陳嘉暐開發</p>
+            <p><a href=index.html><font color="white">回管理者頁面</font></font></a></p>
+        </footer>
+    </div>
+
+    <script src="js/chat.js"></script>
+</body>
+</html> 

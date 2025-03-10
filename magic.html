@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開始魔法之旅 - 住在書店的厭世女巫</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magic.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <canvas id="stars-canvas" class="stars-canvas"></canvas>
+    <canvas id="transition-canvas" class="transition-canvas"></canvas>
+    
+    <div class="container magic-container">
+        <header>
+            <img src="image/logo_pc.png" alt="三餘書店" class="logo">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>住在書店的厭世女巫</h1>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="magic-content">
+                <p id="welcome-message" class="welcome-message">歡迎來到三餘書店，找不到想要的書嗎？不如先讓骰子來解答你的生命。</p>
+                <button id="start-button" class="start-magic-button">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> 與女巫見面
+                </button>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 三餘書店 | 厭世女巫的選書系統| 義守大學陳嘉暐開發</p>
+            <p><a href=index.html><font color="white">回管理者頁面</font></font></a></p>
+        </footer>
+    </div>
+
+    <script src="js/transition.js"></script>
+    <script src="js/stars.js"></script>
+    <script src="js/magic.js"></script>
+</body>
+</html> 
