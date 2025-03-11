@@ -21,7 +21,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         loading.style.display = 'none';
         editForm.style.display = 'block';
     } catch (error) {
-        alert('處理數據時發生錯誤：' + error.message);
+        console.error('API 錯誤:', error);
+        
+        let errorMessage = '處理數據時發生錯誤：';
+        
+        if (error.message.includes('API Key 格式無效')) {
+            errorMessage += '您的 API Key 格式無效，請確保它以 sk- 開頭且不包含特殊字符。';
+        } else if (error.message.includes('429')) {
+            errorMessage += 'OpenAI API 請求次數過多，請稍後再試。';
+        } else if (error.message.includes('401') || error.message.includes('403')) {
+            errorMessage += 'API Key 無效或已過期，請檢查您的 API Key。';
+        } else {
+            errorMessage += error.message;
+        }
+        
+        alert(errorMessage);
         loading.style.display = 'none';
         window.location.href = 'index.html';
     }
@@ -56,11 +70,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 // 使用 OpenAI API 處理圖書清單
 async function processBookList(bookList, apiKey) {
     try {
+        // 清理和編碼 API Key，確保不包含特殊字符
+        const sanitizedApiKey = apiKey.replace(/[^\x20-\x7E]/g, '').trim();
+        
+        // 檢查 API Key 是否有效
+        if (!sanitizedApiKey.startsWith('sk-')) {
+            throw new Error('API Key 格式無效');
+        }
+        
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+                'Authorization': `Bearer ${sanitizedApiKey}`
             },
             body: JSON.stringify({
                 model: 'gpt-4o-mini',
@@ -77,7 +99,9 @@ async function processBookList(bookList, apiKey) {
         });
 
         if (!response.ok) {
-            throw new Error('API 請求失敗');
+            const errorData = await response.json().catch(() => ({}));
+            console.error('API 錯誤詳情:', errorData);
+            throw new Error(`API 請求失敗: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
