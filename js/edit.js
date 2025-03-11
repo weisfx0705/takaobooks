@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const editForm = document.getElementById('edit-form');
     const editedContent = document.getElementById('edited-content');
-    const welcomeMessage = document.getElementById('welcome-message');
     const loading = document.getElementById('loading');
     const restartBtn = document.getElementById('restart-btn');
 
@@ -40,14 +39,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 保存編輯後的內容
         localStorage.setItem('processedBookList', finalContent);
 
-        // 保存自訂歡迎詞（如果有的話）
-        const customWelcome = welcomeMessage.value.trim();
-        if (customWelcome) {
-            localStorage.setItem('customWelcome', customWelcome);
-        } else {
-            localStorage.removeItem('customWelcome');
-        }
-
         // 使用轉場效果
         window.transition.animate(() => {
             // 轉場結束後跳轉到魔法啟動頁面
@@ -57,10 +48,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 重新開始按鈕
     restartBtn.addEventListener('click', () => {
-        if (confirm('確定要重新開始嗎？所有已輸入的資料將會被清除。')) {
-            localStorage.clear();
-            window.location.href = 'index.html';
-        }
+        // 不清除數據，只返回索引頁面
+        window.location.href = 'index.html';
     });
 });
 
