@@ -57,6 +57,36 @@
         #text-input {
             color: #888888;
         }
+        .buttons-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .buttons-group button {
+            flex: 1;
+        }
+        .btn-primary {
+            padding: 0.8rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        .btn-secondary {
+            padding: 0.8rem;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -305,7 +335,10 @@
                         <small class="hint">如果不填寫，將使用預設歡迎詞</small>
                     </div>
                     
-                    <button type="submit" class="btn-primary">下一步</button>
+                    <div class="buttons-group">
+                        <button type="submit" class="btn-primary">確認書單</button>
+                        <button type="button" id="skip-to-magic" class="btn-secondary">直接前往歡迎頁</button>
+                    </div>
                 </form>
             </div>
         </main>

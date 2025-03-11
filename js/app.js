@@ -27,12 +27,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiKeyInput = document.getElementById('api-key');
     const rememberApiKey = document.getElementById('remember-api-key');
     const clearApiKeyBtn = document.getElementById('clear-api-key');
+    const skipToMagicBtn = document.getElementById('skip-to-magic');
+    const welcomeMessageInput = document.getElementById('welcome-message');
 
     // 檢查是否有已儲存的 API Key
     const savedApiKey = localStorage.getItem('savedApiKey');
     if (savedApiKey) {
         apiKeyInput.value = savedApiKey;
     }
+
+    // 處理直接前往歡迎頁按鈕
+    skipToMagicBtn.addEventListener('click', () => {
+        const apiKey = apiKeyInput.value.trim();
+        const storedBookList = localStorage.getItem('bookList');
+        
+        // 檢查是否有已儲存的書單
+        if (!storedBookList) {
+            alert('沒有找到已儲存的書單！請先填寫書單並點擊「確認書單」。');
+            return;
+        }
+        
+        // 檢查是否有 API Key
+        if (!apiKey) {
+            alert('請輸入 OpenAI API Key');
+            return;
+        }
+        
+        // 儲存 API Key (如果選擇記住)
+        if (rememberApiKey.checked) {
+            localStorage.setItem('savedApiKey', apiKey);
+        }
+        
+        // 儲存 API Key 到 session
+        localStorage.setItem('apiKey', apiKey);
+        
+        // 儲存歡迎詞（如果有輸入）
+        const welcomeMessage = welcomeMessageInput.value.trim();
+        if (welcomeMessage) {
+            localStorage.setItem('welcomeMessage', welcomeMessage);
+        }
+        
+        // 直接跳轉到歡迎頁
+        window.location.href = 'magic.html';
+    });
 
     // 清除 API Key 按鈕
     clearApiKeyBtn.addEventListener('click', () => {
