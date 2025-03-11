@@ -29,12 +29,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearApiKeyBtn = document.getElementById('clear-api-key');
     const skipToMagicBtn = document.getElementById('skip-to-magic');
     const welcomeMessageInput = document.getElementById('welcome-message');
+    const confirmWelcomeBtn = document.getElementById('confirm-welcome');
 
     // 檢查是否有已儲存的 API Key
     const savedApiKey = localStorage.getItem('savedApiKey');
     if (savedApiKey) {
         apiKeyInput.value = savedApiKey;
     }
+    
+    // 檢查是否有已儲存的歡迎詞
+    const savedWelcomeMessage = localStorage.getItem('welcomeMessage');
+    if (savedWelcomeMessage) {
+        welcomeMessageInput.value = savedWelcomeMessage;
+    }
+
+    // 確認歡迎詞按鈕處理
+    confirmWelcomeBtn.addEventListener('click', () => {
+        const welcomeMessage = welcomeMessageInput.value.trim();
+        localStorage.setItem('welcomeMessage', welcomeMessage);
+        
+        // 顯示確認訊息
+        const originalBackgroundColor = welcomeMessageInput.style.backgroundColor;
+        welcomeMessageInput.style.backgroundColor = '#e6ffe6'; // 淡綠色背景表示成功
+        
+        // 在按鈕上顯示成功圖標
+        const originalContent = confirmWelcomeBtn.innerHTML;
+        confirmWelcomeBtn.innerHTML = '<i class="fa-solid fa-check-double"></i>';
+        
+        // 2秒後恢復原狀
+        setTimeout(() => {
+            welcomeMessageInput.style.backgroundColor = originalBackgroundColor;
+            confirmWelcomeBtn.innerHTML = originalContent;
+        }, 2000);
+    });
 
     // 處理直接前往歡迎頁按鈕
     skipToMagicBtn.addEventListener('click', () => {

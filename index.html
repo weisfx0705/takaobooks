@@ -87,6 +87,40 @@
         .btn-secondary:hover {
             background-color: #5a6268;
         }
+        .input-with-button {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+        }
+        .input-with-button input[type="password"],
+        .input-with-button input[type="text"] {
+            flex: 1;
+            width: calc(100% - 40px);
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .input-with-button textarea {
+            flex: 1;
+            width: calc(100% - 40px);
+        }
+        .input-with-button .btn-icon {
+            width: 36px;
+            height: 36px;
+            margin-left: 8px;
+            margin-top: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-with-button .btn-icon:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -331,13 +365,18 @@
                     
                     <div class="form-group">
                         <label for="welcome-message">自訂歡迎詞（選填）</label>
-                        <textarea id="welcome-message" rows="3" maxlength="200" placeholder="歡迎來到三餘書店，找不到想要的書嗎？不如先讓骰子來解答你的生命。"></textarea>
+                        <div class="input-with-button">
+                            <textarea id="welcome-message" rows="3" maxlength="200" placeholder="歡迎來到三餘書店，找不到想要的書嗎？不如先讓骰子來解答你的生命。"></textarea>
+                            <button type="button" id="confirm-welcome" class="btn-icon" title="確認更新歡迎詞">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                        </div>
                         <small class="hint">如果不填寫，將使用預設歡迎詞</small>
                     </div>
                     
                     <div class="buttons-group">
                         <button type="submit" class="btn-primary">確認書單</button>
-                        <button type="button" id="skip-to-magic" class="btn-secondary">保存歡迎詞並前往</button>
+                        <button type="button" id="skip-to-magic" class="btn-secondary">直接開始</button>
                     </div>
                 </form>
             </div>
