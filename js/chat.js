@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let hasSubmitted = false;  // 新增：追蹤是否已經送出過請求
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
-        recognition.continuous = false;
+        recognition.continuous = true;
         recognition.interimResults = true;
         recognition.lang = 'zh-TW';
 
@@ -140,21 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = event.results[event.results.length - 1];
             const transcript = result[0].transcript;
             
-            // 如果是最終結果，更新輸入框
-            if (result.isFinal) {
-                userInput.value = transcript;
-                // 自動送出訊息，但只在還沒送出過的情況下
-                const message = transcript.trim();
-                if (message && !hasSubmitted) {
-                    hasSubmitted = true;  // 標記已經送出
-                    chatForm.dispatchEvent(new Event('submit'));
-                    // 確保輸入框被清空
-                    setTimeout(clearInput, 10);
-                }
-            } else {
-                // 如果是中間結果，只更新輸入框
-                userInput.value = transcript;
-            }
+            // 無論是最終結果還是中間結果，只更新輸入框，不自動送出
+            userInput.value = transcript;
         };
 
         recognition.onend = () => {
