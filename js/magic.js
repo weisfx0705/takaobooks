@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeMessage = document.getElementById('welcome-message');
     
     // 檢查是否有自定義歡迎詞
-    const customWelcome = localStorage.getItem('customWelcome');
+    const customWelcome = localStorage.getItem('welcomeMessage');
     if (customWelcome) {
         welcomeMessage.textContent = customWelcome;
     }
