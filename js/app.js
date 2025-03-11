@@ -39,18 +39,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // 處理直接前往歡迎頁按鈕
     skipToMagicBtn.addEventListener('click', () => {
         const apiKey = apiKeyInput.value.trim();
+        const currentBookList = textInput.value.trim();
         const storedBookList = localStorage.getItem('bookList');
-        
-        // 檢查是否有已儲存的書單
-        if (!storedBookList) {
-            alert('沒有找到已儲存的書單！請先填寫書單並點擊「確認書單」。');
-            return;
-        }
+        const welcomeMessage = welcomeMessageInput.value.trim();
         
         // 檢查是否有 API Key
         if (!apiKey) {
             alert('請輸入 OpenAI API Key');
             return;
+        }
+        
+        // 檢查是否有書單（當前輸入的或已儲存的）
+        if (!currentBookList && !storedBookList) {
+            // 如果用戶確認要使用預設書單或空白書單
+            if (confirm('沒有找到已儲存的書單！是否要使用當前預設書單並繼續前往歡迎頁？\n\n（如果您只想更改歡迎詞，請點擊「確定」）')) {
+                // 使用當前輸入框中的書單（即使是預設的）
+                localStorage.setItem('bookList', currentBookList);
+            } else {
+                // 用戶取消操作
+                return;
+            }
+        } else if (currentBookList && currentBookList !== storedBookList) {
+            // 如果用戶修改了書單但沒點「確認書單」
+            if (confirm('您修改了書單但尚未保存！是否要保存當前書單並繼續？')) {
+                localStorage.setItem('bookList', currentBookList);
+            } else {
+                // 使用已儲存的書單（如果有）
+                if (!storedBookList) {
+                    alert('沒有已儲存的書單！請先填寫書單並點擊「確認書單」。');
+                    return;
+                }
+            }
         }
         
         // 儲存 API Key (如果選擇記住)
@@ -61,11 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 儲存 API Key 到 session
         localStorage.setItem('apiKey', apiKey);
         
-        // 儲存歡迎詞（如果有輸入）
-        const welcomeMessage = welcomeMessageInput.value.trim();
-        if (welcomeMessage) {
-            localStorage.setItem('welcomeMessage', welcomeMessage);
-        }
+        // 儲存歡迎詞（無論是否為空）
+        localStorage.setItem('welcomeMessage', welcomeMessage);
         
         // 直接跳轉到歡迎頁
         window.location.href = 'magic.html';
